@@ -1,0 +1,91 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background-color: #222;
+    height: 100vh;
+}
+
+h1 {
+    color: white;
+}
+
+.container{
+    padding: 20px;
+    height: 40vh;
+    width: 50vh;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.leaderboard{
+    background-color: white;
+    height: 200px;
+    width: 15vw;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+#timer {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 30px;
+}
+
+#question {
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+#quiz-area{
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#choices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    gap: 20px 20px;
+    padding: 20px;
+}
+
+.button {
+    background-color: #4fbee7;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#leave {
+    margin-bottom: 10px;
+    height: 40px;
+    width: 120px;
+    border-radius: 20px;
+    cursor: pointer;
+}

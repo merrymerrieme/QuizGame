@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <title>Leaderboard</title>
+</head>
+<body>
+    <h1>Congratulations</h1>
+    <div class="container center" style="justify-content: start;">
+        <h2>LEADERBOARD</h2>
+        <ol>
+            {% for user in users %}
+                <li>{{ user[0] }} - {{ user[1] }}</li>
+            {%endfor%}
+        </ol>
+        
+    </div>
+    <br>
+    <a href="/delete" style="color: white">Back</a>
+</body>
+</html>

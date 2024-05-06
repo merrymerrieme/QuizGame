@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASE</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+    
+    <h1>Enter your name</h1><br>
+    <div class="container center" style="gap: 10px; height: 120px">
+        {% if game_ongoing %}
+        <h2>Cannot join, the game has started.</h2>
+        {% else %}
+        <form action="/enter" method="POST" id="user_form" style="display: flex; flex-direction: column; align-items: center;">
+            <input type="text" name="username" id="username"><br>
+            <input type="submit" id="status" value="{{ status }}">
+        </form>
+        
+        <a href="/delete" id="delete">Reset</a>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+                
+        const socket = io()
+
+        socket.on('update_lobby', function(status){
+            btn = document.getElementById("status")
+            if(btn) btn.value = status
+
+
+            // comment out this if error
+            if(btn.value == "Join"){
+                document.getElementById("delete").style.display = "none";
+            }else{
+                document.getElementById("delete").style.display = "block";
+            }
+
+        })
+    </script>
+</body>
+</html>

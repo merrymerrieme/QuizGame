@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    
+    <title>Quiz Game</title>
+</head>
+<body>
+    <h1>Quiz Game</h1>
+    <h1 id="username">{{ username }} </h1>
+    <input type="hidden" id="questions" value="{{ questions }}">
+    <div class="leaderboard">
+        <h2>Leaderboard</h2>
+        <ol id="lboard">
+            
+        </ol>
+    </div>
+
+
+    <h1 id="timer">0</h1>
+    <div class="container" style="display:flex; flex-direction: column; gap: 20px">
+        <div id="quiz-area" class="center"></div>
+        
+        <div class="options center">
+            <button id="leave">Leave</button>
+            {% if host == username %}
+            <input type="button" value="Start" id="start">
+            {% else %}
+            <input type="button" value="Start" id="start" style="display: none;">
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+    
+    <script>
+        const USERNAME = {{ username | tojson }};
+        const QUESTIONS = {{ questions | tojson}};
+        const HOST = {{ host | tojson }}
+    </script>
+    <script src="{{ url_for('static',filename='script.js') }}"></script>
+
+</body>
+</html>
