@@ -1,11 +1,25 @@
 body {
+    background-color: #222;
+    height: 100vh;
+    
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
 
-    background-color: #222;
-    height: 100vh;
+.main{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0px;
+    left: 0px;
+
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 h1 {

@@ -80,15 +80,20 @@ def game(username):
         questions_data = cursor.fetchall()
         questions = [{"id": data[0], "question": data[1], "choices": data[2].split(','), "answer": data[3]} for data in questions_data]
         conn.close()
+
         
-        global isHost, Host
+        global isHost, Host, game_ongoing
+        if game_ongoing:
+            leave(username)
+            return redirect('/')
+
         if Host:
             isHost = 0
         else:
             Host = username
             socketio.emit('update_lobby', 'Join')  
             isHost = 1
-
+        
         return render_template('index.html', username = username, questions = questions, host = Host)
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
@@ -108,11 +113,15 @@ def start():
 
 @socketio.on('connect')
 def handle_connect():
-    pass 
+    global game_ongoing
+    if not game_ongoing:
+        username = request.args.get('username')
+        socketio.emit("player_joined", username)
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    pass 
+    print("Client Disconnected")
+        
 
 
 @socketio.on('request_highest_scores')
@@ -146,8 +155,14 @@ def start_timer():
 
 
 @app.route('/leave', methods=['POST'])
-def leave():
+def attempt_leave():
     username = request.form['username']
+    leave(username)
+    return "Left"
+
+
+   
+def leave(username):
     try:
         conn = mysql.connector.connect(**mysql_config)
         cursor = conn.cursor()

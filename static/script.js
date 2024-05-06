@@ -3,12 +3,17 @@ const socket = io({query : {username : USERNAME}});
 
 
 $("#start").click(function(){
+    ongoing = true
     $.ajax({
         url: "/start"
     })
 })
 
 $("#leave").click(function(){
+   leave()
+})
+
+function leave(){
     $.ajax({
         url: "/leave",
         type: "POST",
@@ -19,7 +24,7 @@ $("#leave").click(function(){
             location.replace("/")
         }
     })
-})
+}
 
 socket.on("start_game", function(){
     document.getElementById("start").style.display = "none";
@@ -34,6 +39,22 @@ socket.on("start_game", function(){
 
 socket.on('connect', function(data){
     socket.emit("lobby_started")
+})
+
+
+
+socket.on("player_joined", function(data){
+    if(data && data !== "undefined") {
+        player_alert = `${data} has joined!`;
+
+        Swal.fire({
+            position: "center",
+            icon: "info",
+            title: player_alert,
+            showConfirmButton: false,
+            timer: 1000
+        });
+    }
 })
 
 socket.on('lobby_created', function(data){
@@ -129,9 +150,21 @@ function checkAnswer(choice, questionId) {
     return;
     }
     if (data.status === 'correct') {
-    alert("Your answer is correct!");
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Correct!",
+            showConfirmButton: false,
+            timer: 600
+        });
     } else {
-    alert("Your answer is incorrect!");
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Incorrect!",
+            showConfirmButton: false,
+            timer: 600
+        });
     }
     // Display the next question or handle quiz completion as needed
 

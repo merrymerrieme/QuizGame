@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
-    
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <title>Quiz Game</title>
 </head>
 <body>
-    <h1>Quiz Game</h1>
+    <div class="main">
+        <h1>Quiz Game</h1>
     <h1 id="username">{{ username }} </h1>
     <input type="hidden" id="questions" value="{{ questions }}">
     <div class="leaderboard">
@@ -31,6 +33,7 @@
             <input type="button" value="Start" id="start" style="display: none;">
             {% endif %}
         </div>
+    </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
